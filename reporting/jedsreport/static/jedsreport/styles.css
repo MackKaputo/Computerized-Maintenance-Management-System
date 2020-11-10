@@ -1,0 +1,44 @@
+body {
+    background-color: rgb(238, 236, 243);
+    margin: 20px;
+    padding: 20px;
+}
+
+.nav {
+    background-color: rgb(245, 240, 241);
+    font-weight: 600;
+}
+.counter {
+    margin: auto;
+    width: 50%;
+    border: 3px solid red;
+    padding: 10px;
+    background-color: white;
+    text-align: center;
+    border-radius: 40%;
+}
+.counter > p {
+    align-content: center;
+}
+
+.flex-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.flex-container > div {
+    width: 200px;
+    height: 200px;
+    margin: 20px;
+}
+.flex-container > div > img {
+    width: 100%;
+    height: 100%;
+}
+
+#report {
+    margin: 2%;
+    padding: 2%;
+    justify-content: center;
+    line-height: 50px;
+    font-family: sans-serif;
+}

@@ -1,0 +1,33 @@
+{% extends "jedsreport/layout.html" %}
+{% load static %}
+{% block body %}
+<h1 style="text-align: center;margin:15px;"> {{ report_view.title }}</h1>
+
+<div  id="report">
+    <div class="border border-primary" id="report">
+        <b>Reported by: </b>{{ report_view.reporter.username }} <br>
+        <b>Date : </b>{{ report_view.timestamp }}<br>
+        <b>Category : </b>{{ report_view.category }}<br>
+        <b>Venue/Office : </b>{{ report_view.venue }}<br>
+        <b>Department : </b>{{ report_view.department }}<br>
+        <b>Description : </b><br>{{ report_view.description }}
+    </div>
+    <div>
+        <form action="{% url 'solved' report_view.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn-success">Resolved</button>
+        </form>
+    </div>
+    <button id="pending-expand">Set as Pending</button>
+    <div id="pending">    
+        <form action="{% url 'pending' report_view.id %}" method="POST">
+            {% csrf_token %}  
+            <textarea id="pending-reason" name="pending" placeholder="Briefly Tell why this is pending" cols="50" required></textarea>
+            <br><button type="submit" class="btn-success">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+    <script src="{% static 'jedsreport/pending.js' %}"></script>
+{% endblock %}

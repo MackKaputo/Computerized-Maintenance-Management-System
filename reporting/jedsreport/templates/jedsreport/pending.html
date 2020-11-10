@@ -1,0 +1,22 @@
+{% extends "jedsreport/layout.html" %}
+
+{% block body %}
+<h5 style="padding:1%;"> Pending Reports (Resolved) </h5>
+    {% if user.is_authenticated %}
+
+        <div class="flex-container">
+            {% for report in pending_reports %}
+                <div >
+                    <h5>{{ report.title }}</h5>
+                    <p>Pending Reason: {{ report.pending_reason }} </p>
+                    {% if report.image %}
+                        <img src="{{ report.image.url }}">
+                    {% endif %} 
+                </div>
+            {% empty %}
+                <li> There is no pending problems </li>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock %}

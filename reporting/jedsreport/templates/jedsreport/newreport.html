@@ -1,0 +1,19 @@
+{% extends "jedsreport/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <form method="post" action="{% url 'newreport' %}" enctype="multipart/form-data" id="compose-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+        {{ form }}
+        </div>
+
+        <button type="submit" class="btn-info" id="report">Report</button>   
+    </form>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'jedsreport/newreport.js' %}"></script>
+{% endblock %}

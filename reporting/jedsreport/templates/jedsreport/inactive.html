@@ -1,0 +1,21 @@
+{% extends "jedsreport/layout.html" %}
+
+{% block body %}
+<h5 style="padding:1%;"> Inactive Reports (Resolved) </h5>
+    {% if user.is_authenticated %}
+
+        <div class="flex-container">
+            {% for inactive in inactives %}
+                <div >
+                    <h5>{{ inactive.title }}</h5>
+                    {% if inactive.image %}
+                        <img src="{{ inactive.image.url }}">
+                    {% endif %} 
+                </div>
+            {% empty %}
+                <li> There is no resolved problems so far </li>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock %}
