@@ -14,16 +14,27 @@
     </div>
     <button id="resolved-expand">Set as Resolved</button>
     <div id="resolved">
-        <form action="{% url 'solved' report_view.id %}" method="POST">
+        <form action="{% url 'solved' report_view.pk %}" method="POST">
             {% csrf_token %}
+            <div class="#">
+            Resolved by: <input type="text" name="who"  placeholder="Employee/Contractor Name" class="#" required> 
+            </div>
+            <div class="#">
+                Cost: <input type="number" class="#" name="cost">
+            </div>
+            <div>
+                <textarea id="comment" name="comment" placeholder="Any comment about completed Task" cols="100" ></textarea>
+            </div>
             <button type="submit" class="btn-success">Resolved</button>
         </form>
     </div>
     <button id="pending-expand">Set as Pending</button>
     <div id="pending">    
-        <form action="{% url 'pending' report_view.id %}" method="POST">
-            {% csrf_token %}  
-            <textarea id="pending-reason" name="pending" placeholder="Briefly Tell why this is pending" cols="50" required></textarea>
+        <form action="{% url 'pending' report_view.pk %}" method="POST">
+            {% csrf_token %}
+            <div>  
+            <textarea id="pending-reason" name="reason" placeholder="Briefly Tell why this is pending" cols="100" required></textarea>
+            </div>
             <br><button type="submit" class="btn-success">Submit</button>
         </form>
     </div>

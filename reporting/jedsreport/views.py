@@ -6,15 +6,15 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django import forms
-from .models import User, Report
+from .models import User, Report, Pending, Resolved
 # Create your views here.
 
 def index(request):
     reports_count =len(Report.objects.all())
-    unread = Report.objects.filter(status="unread")
-    unread_count = len(Report.objects.filter(status="unread"))
-    pending_count = len(Report.objects.filter(status="pending"))
-    solved_count = len(Report.objects.filter(status="resolved"))
+    unread = Report.objects.filter(status_read = False)
+    unread_count = len(unread)
+    pending_count = len(Pending.objects.filter(status=True))
+    solved_count = len(Resolved.objects.all())
     return render(request,"jedsreport/index.html",{
         "unread":unread,
         "unread_count":unread_count,
@@ -134,7 +134,7 @@ def new_report(request):
                 venue = form.cleaned_data["venue"]
                 department = form.cleaned_data["department"]
                 category = form.cleaned_data["category"]
-                #image = request.FILES["image"]
+                #image = request.FILES["image"] Should not be here since there is no file attached
 
                 #Create a new Report model and save it
                 this_report = Report(reporter=reporter, title=title, description=description,
@@ -147,31 +147,35 @@ def new_report(request):
         "form": NewReport().as_p()
     })
 
+#The solved ones
 def inactive(request):
-    inactives = Report.objects.filter(status="resolved")
+    inactives = Resolved.objects.all()
     return render(request,"jedsreport/inactive.html",{
         "inactives":inactives
     })
 
 def report(request,report_id):
-    report_view = Report.objects.get(id=report_id)
+    report_view = Report.objects.get(pk=report_id)
+    
     return render(request, "jedsreport/report.html",{
-        "report_view":report_view
+        "report_view":report_view,
+        #"report_view.id":report_id
     })
 
 #Set report as pending
 def pending(request,report_id):
     if request.method =="POST":
-        reason = request.POST["pending"]
-        pending_report = Report.objects.get(id=report_id)
-        pending_report.status = "pending"
-        pending_report.pending_reason = reason
+        report = Report.objects.get(pk=report_id)
+        report.status_read = True
+        report.save()
+        reason = request.POST["reason"]
+        pending_report = Pending(report=report,reason=reason)
         pending_report.save()
         return redirect("index")
 
 #Display pending Items
 def pending_report(request):
-    pending_reports = Report.objects.filter(status="pending")
+    pending_reports = Pending.objects.filter(status=True)
     return render(request,"jedsreport/pending.html",{
         "pending_reports":pending_reports 
     })
@@ -226,8 +230,14 @@ def plot(request):
 #Solved function to mark report as solved
 def solved(request,report_id):
     if request.method == "POST":
-        item = Report.objects.get(id=report_id)
-        item.status = "resolved"
+        item = Report.objects.get(pk=report_id)
+        item.status_read = True
         item.save()
+        who = request.POST["who"]
+        comment = request.POST["comment"]
+        cost = int(request.POST["cost"])
+        resolved = Resolved(report=item, who =who , cost=cost ,comment=comment )
+        resolved.save()
         return redirect("index")
+
         

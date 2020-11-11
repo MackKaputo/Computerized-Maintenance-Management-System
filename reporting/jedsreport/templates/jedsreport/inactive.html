@@ -7,8 +7,9 @@
         <div class="flex-container">
             {% for inactive in inactives %}
                 <div >
-                    <h5>{{ inactive.title }}</h5>
-                    {% if inactive.image %}
+                    <h5>{{ inactive.report.title }}</h5>
+                    <p>Resolved by: {{ inactive.who }} </p>
+                    {% if inactive.report.image %}
                         <img src="{{ inactive.image.url }}">
                     {% endif %} 
                 </div>

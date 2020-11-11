@@ -7,10 +7,10 @@
         <div class="flex-container">
             {% for report in pending_reports %}
                 <div >
-                    <h5>{{ report.title }}</h5>
-                    <p>Pending Reason: {{ report.pending_reason }} </p>
-                    {% if report.image %}
-                        <img src="{{ report.image.url }}">
+                    <h5>{{ report.report.title }}</h5>
+                    <p>Reason: {{ report.reason }} </p>
+                    {% if report.report.image %}
+                        <img src="{{ report.report.image.url }}">
                     {% endif %} 
                 </div>
             {% empty %}

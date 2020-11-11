@@ -6,14 +6,14 @@
         <h6 style="text-align: right;font-family: sans-serif;"><i>Logged in as <b>{{ user.username }}</b></i></h6>
         <div class="counter">
             <p>Total : {{ reports_count }}</p>
-            <p>Resolved  : {{ solved_count }}</p>
+            <p>Resolved  : {{ solved_count }}</p> 
             <p>Pending : {{ pending_count }}</p>
             <p>Unread : {{ unread_count }}</p>
-        </div>
-        <div class="flex-container">
+       </div>
+         <div class="flex-container">
             {% for report in unread %}
                 <div >
-                    <a href="{% url 'report' report.id %}">
+                    <a href="{% url 'report' report.pk %}">
                     <h5>{{ report.title }}</h5>
                     </a>
                     {% if report.image %}
@@ -23,7 +23,7 @@
             {% empty %}
             <li>No issues has been reported </li>
             {% endfor %}
-        </div>
+        </div> 
        
     {% endif %}
 {% endblock %}

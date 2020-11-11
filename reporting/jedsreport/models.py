@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     pass
 
+
 class Report(models.Model):
     """ The report card """
     reporter = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reports")
@@ -18,9 +19,28 @@ class Report(models.Model):
     category =models.CharField(max_length=150)
     image = models.ImageField(upload_to="images",null=True, blank=True)
     #The status will be one of: unread, pending, resolved
-    status = models.CharField(max_length=20,default="unread", null=True)
-    pending_reason = models.CharField(max_length=200, null=True)
-
+    status_read = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.title} in {self.venue}"
+
+class Resolved(models.Model):
+    """ These are the solved reports  """
+    report = models.OneToOneField(Report, primary_key=True, on_delete=models.CASCADE, related_name="report_solution")
+    timestamp = models.DateTimeField(auto_now_add=True)
+    who = models.CharField(max_length=200, null=True)
+    cost = models.IntegerField(null=True)
+    comment = models.CharField(max_length=250, null=True)
+
+    def __str__(self):
+        return f"resolved by: {self.who} on {self.timestamp}"
+
+class Pending(models.Model):
+    """ These are the pending reports """
+    report = models.OneToOneField(Report, primary_key=True, on_delete=models.CASCADE, related_name="pending_report")
+    timestamp = models.DateTimeField(auto_now_add=True)
+    status = models.BooleanField(default=True)
+    reason = models.CharField(max_length=250, null=True)
+
+    def __str__(self):
+        return f"since: {self.timestamp}, {self.reason}"
