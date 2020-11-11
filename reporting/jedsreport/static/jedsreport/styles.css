@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(51, 57, 107);
+    background-color: rgb(31, 12, 65);
     margin: 20px;
     padding: 20px;
     color: antiquewhite;
@@ -76,3 +76,7 @@ tbody :hover, thead :hover{
 td :hover{
     font-size: xx-large;
 }
+
+table, th, td {
+    border: 1px solid rgb(49, 46, 46);
+  }
