@@ -148,7 +148,7 @@ def new_report(request):
     })
 
 def inactive(request):
-    inactives = Report.objects.filter(solved=True)
+    inactives = Report.objects.filter(status="resolved")
     return render(request,"jedsreport/inactive.html",{
         "inactives":inactives
     })
@@ -227,7 +227,7 @@ def plot(request):
 def solved(request,report_id):
     if request.method == "POST":
         item = Report.objects.get(id=report_id)
-        item.solved = True
+        item.status = "resolved"
         item.save()
         return redirect("index")
         

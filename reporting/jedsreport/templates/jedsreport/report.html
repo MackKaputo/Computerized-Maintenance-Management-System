@@ -12,7 +12,8 @@
         <b>Department : </b>{{ report_view.department }}<br>
         <b>Description : </b><br>{{ report_view.description }}
     </div>
-    <div>
+    <button id="resolved-expand">Set as Resolved</button>
+    <div id="resolved">
         <form action="{% url 'solved' report_view.id %}" method="POST">
             {% csrf_token %}
             <button type="submit" class="btn-success">Resolved</button>
