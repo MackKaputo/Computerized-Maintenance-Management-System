@@ -14,7 +14,9 @@ urlpatterns = [
     path("plot",views.plot,name="plot"),
     path("solved/<int:report_id>",views.solved, name="solved"),
     path("pending/<int:report_id>", views.pending, name = "pending"),
-    path("pending", views.pending_report, name = "pending_report")
+    path("pending", views.pending_report, name = "pending_report"),
+    path("unattended", views.unattended, name="unattended")
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

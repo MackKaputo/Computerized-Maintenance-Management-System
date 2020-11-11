@@ -1,7 +1,8 @@
 body {
-    background-color: white;
+    background-color: rgb(51, 57, 107);
     margin: 20px;
     padding: 20px;
+    color: antiquewhite;
 }
 
 .nav {
@@ -24,6 +25,7 @@ body {
 .flex-container{
     display: flex;
     flex-wrap: wrap;
+    
 }
 .flex-container > div {
     width: 200px;
@@ -41,4 +43,36 @@ body {
     justify-content: center;
     line-height: 50px;
     font-family: sans-serif;
+}
+
+table{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 700px;
+    background-color: rgb(24, 23, 23);
+    color: white;
+    font-size: x-large;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+td {
+    padding: 30px;
+
+}
+th {
+    padding: 15px;
+}
+
+tbody :hover, thead :hover{
+    background-color: rgb(17, 17, 17);
+}
+
+#table {
+    margin-top: 100px;
+    margin-bottom: auto;
+}
+
+td :hover{
+    font-size: xx-large;
 }

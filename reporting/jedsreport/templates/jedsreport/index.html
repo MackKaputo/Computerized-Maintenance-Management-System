@@ -3,27 +3,32 @@
 {% block body %}
     
     {% if user.is_authenticated %}
-        <h6 style="text-align: right;font-family: sans-serif;"><i>Logged in as <b>{{ user.username }}</b></i></h6>
-        <div class="counter">
-            <p>Total : {{ reports_count }}</p>
-            <p>Resolved  : {{ solved_count }}</p> 
-            <p>Pending : {{ pending_count }}</p>
-            <p>Unread : {{ unread_count }}</p>
-       </div>
-         <div class="flex-container">
-            {% for report in unread %}
-                <div >
-                    <a href="{% url 'report' report.pk %}">
-                    <h5>{{ report.title }}</h5>
-                    </a>
-                    {% if report.image %}
-                        <img src="{{ report.image.url }}">
-                    {% endif %} 
-                </div>
-            {% empty %}
-            <li>No issues has been reported </li>
-            {% endfor %}
-        </div> 
+    <h6 style="text-align: right;font-family: sans-serif;"><i>Logged in as <b>{{ user.username }}</b></i></h6>
+    <div id="table">
+       <table >
+            <thead>
+                <tr style="text-align: center;">
+                    <th colspan="3">Total Reports </th>
+                </tr>
+                <tr style="text-align: center;">
+                    <th colspan="3">{{ reports_count }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Unattended</td>
+                    <td>Pending</td>
+                    <td>Resolved</td>
+                </tr>
+                <tr>
+                    <td>{{ unread_count }}</td>
+                    <td>{{ pending_count }}</td>
+                    <td>{{ solved_count }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+          
        
     {% endif %}
 {% endblock %}

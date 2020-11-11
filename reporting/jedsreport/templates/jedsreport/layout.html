@@ -13,13 +13,16 @@
         <div>
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}">Unread reports</a>
+                <a class="nav-link" href="{% url 'index' %}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'pending_report' %}">Pending reports</a>
+                <a class="nav-link" href="{% url 'unattended' %}">Unattended </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'inactive' %}">Resolved reports</a>
+                <a class="nav-link" href="{% url 'pending_report' %}">Pending </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'inactive' %}">Resolved </a>
             </li>
             {% if user.is_authenticated %}
                 <li class="nav-item">

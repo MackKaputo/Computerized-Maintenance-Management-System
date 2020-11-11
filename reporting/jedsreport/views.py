@@ -23,6 +23,12 @@ def index(request):
         "reports_count":reports_count
     })
 
+def unattended(request):
+    unread = Report.objects.filter(status_read = False)
+    return render(request,"jedsreport/unattended.html",{
+        "unread":unread
+    })
+
 
 def login_view(request):
     if request.method == "POST":
