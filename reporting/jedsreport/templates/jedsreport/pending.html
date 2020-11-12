@@ -1,10 +1,10 @@
 {% extends "jedsreport/layout.html" %}
 
 {% block body %}
-<h5 style="padding:1%;"> Pending Reports (Resolved) </h5>
+<h1 style="padding:4%; text-align: center;"> Pending Reports  </h1>
     {% if user.is_authenticated %}
 
-        <div class="flex-container">
+     <!--   <div class="flex-container">
             {% for report in pending_reports %}
                 <div >
                     <h5>{{ report.report.title }}</h5>
@@ -16,7 +16,25 @@
             {% empty %}
                 <li> There is no pending problems </li>
             {% endfor %}
-        </div>
+        </div> -->
+        <table style="background-color:darkgoldenrod; width: 90%;">
+            <thead style="background-color: rgb(255, 140, 0);">
+                <tr style="text-align: center;">
+                    <th id="pdt"> Object </th>
+                    <th id="pdt"> Reason </th>
+                    <th id="pdt"> Since </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for report in pending_reports %}
+                <tr>
+                    <td id="pdt">{{ report.report.title }}</td>
+                    <td id="pdt">{{ report.reason }}</td>
+                    <td id="pdt">{{ report.timestamp}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% endif %}
 
 {% endblock %}

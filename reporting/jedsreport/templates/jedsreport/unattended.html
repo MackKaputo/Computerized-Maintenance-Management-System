@@ -1,0 +1,23 @@
+{% extends "jedsreport/layout.html" %}
+
+{% block body %}
+    
+    {% if user.is_authenticated %}
+        <h6 style="text-align: right;font-family: sans-serif;"><i>Logged in as <b>{{ user.username }}</b></i></h6>
+         <div class="flex-container">
+            {% for report in unread %}
+                <div >
+                    <a href="{% url 'report' report.pk %}">
+                    <h5 style="color: antiquewhite;">{{ report.title }}</h5>
+                    </a>
+                    {% if report.image %}
+                        <img src="{{ report.image.url }}">
+                    {% endif %} 
+                </div>
+            {% empty %}
+            <li>No issues has been reported </li>
+            {% endfor %}
+        </div> 
+       
+    {% endif %}
+{% endblock %}
