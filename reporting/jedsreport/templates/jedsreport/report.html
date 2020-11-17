@@ -5,12 +5,54 @@
 
 <div  id="report">
     <div class="border border-primary" id="report">
-        <b>Reported by: </b>{{ report_view.reporter.username }} <br>
+     <!--   <b>Reported by: </b>{{ report_view.reporter.username }} <br>
         <b>Date : </b>{{ report_view.timestamp }}<br>
         <b>Category : </b>{{ report_view.category }}<br>
         <b>Venue/Office : </b>{{ report_view.venue }}<br>
         <b>Department : </b>{{ report_view.department }}<br>
-        <b>Description : </b><br>{{ report_view.description }}
+        <b>Description : </b><br>{{ report_view.description }} -->
+
+        <table style="background-color:rgb(72, 104, 21); width: 90%;">
+          <!--  <thead style="background-color: rgb(255, 140, 0);">
+                <tr style="text-align: center;">
+                    <th id="pdt"> Object </th>
+                    <th id="pdt"> {{ report_view.title }} </th>
+                
+                </tr>
+            </thead>-->
+            <tbody>
+                
+                <tr>
+                    <td id="pdt"> Reported by </td>
+                    <td id="pdt">{{ report_view.reporter.username }}</td>
+                </tr>
+                <tr>
+                    <td id="pdt"> Reported on </td>
+                    <td id="pdt">{{ report_view.timestamp }}</td>
+                </tr>
+                <tr>
+                    <td id="pdt"> Category </td>
+                    <td id="pdt">{{ report_view.category }}</td>
+                </tr>
+                <tr>
+                    <td id="pdt"> Venue/Office </td>
+                    <td id="pdt">{{ report_view.venue }}</td>
+                </tr>
+                <tr>
+                    <td id="pdt"> Department </td>
+                    <td id="pdt">{{ report_view.department }}</td>
+                </tr>
+                <tr>
+                    <td id="pdt" colspan="2"> Description </td>
+                    
+                </tr>
+                <tr>
+                    <td id="pdt" colspan="2">{{ report_view.description }}</td>
+                </tr>
+
+                
+            </tbody>
+        </table>
     </div>
     <button id="resolved-expand" class="btn btn-success">Set as Resolved</button>
     <div id="resolved">
