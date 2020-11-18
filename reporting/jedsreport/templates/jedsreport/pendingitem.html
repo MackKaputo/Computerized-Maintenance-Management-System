@@ -1,0 +1,95 @@
+{% extends "jedsreport/layout.html" %}
+{% load static %}
+{% block body %}
+<h1 style="text-align: center;margin:15px;"> {{ report_view.report.title }}</h1>
+
+<div  id="report">
+    <div class="border border-primary" id="report">
+     <!--   <b>Reported by: </b>{{ report_view.reporter.username }} <br>
+        <b>Date : </b>{{ report_view.timestamp }}<br>
+        <b>Category : </b>{{ report_view.category }}<br>
+        <b>Venue/Office : </b>{{ report_view.venue }}<br>
+        <b>Department : </b>{{ report_view.department }}<br>
+        <b>Description : </b><br>{{ report_view.description }} -->
+
+        <table style="background-color:rgb(72, 104, 21); width: 90%;">
+          <!--  <thead style="background-color: rgb(255, 140, 0);">
+                <tr style="text-align: center;">
+                    <th id="pdt"> Object </th>
+                    <th id="pdt"> {{ report_view.title }} </th>
+                
+                </tr>
+            </thead>-->
+            <tbody>
+                
+                <tr>
+                    <td id="pdt"> Reported by </td>
+                    <td id="pdt">{{ report_view.report.reporter.username }}</td>
+                </tr>
+                <tr>
+                    <td id="pdt"> Reported on </td>
+                    <td id="pdt">{{ report_view.report.timestamp }}</td>
+                </tr>
+                <tr>
+                    <td id="pdt"> Pending since </td>
+                    <td id="pdt">{{ report_view.timestamp }}</td>
+                </tr>
+                <tr>
+                    <td id="pdt"> Pending Because </td>
+                    <td id="pdt">{{ report_view.reason }}</td>
+                </tr>
+                <tr>
+                    <td id="pdt"> Category </td>
+                    <td id="pdt">{{ report_view.report.category }}</td>
+                </tr>
+                <tr>
+                    <td id="pdt"> Venue/Office </td>
+                    <td id="pdt">{{ report_view.report.venue }}</td>
+                </tr>
+                <tr>
+                    <td id="pdt"> Department </td>
+                    <td id="pdt">{{ report_view.report.department }}</td>
+                </tr>
+                <tr>
+                    <td id="pdt" colspan="2"> Description </td>
+                    
+                </tr>
+                <tr>
+                    <td id="pdt" colspan="2">{{ report_view.report.description }}</td>
+                </tr>
+
+                
+            </tbody>
+        </table>
+    </div>
+    <button id="resolved-expand" class="btn btn-success">Set as Resolved</button>
+    <div id="resolved">
+        <form action="{% url 'solved' report_view.pk %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+            Resolved by: <input type="text" name="who"  placeholder="Employee/Contractor Name" class="form-control" required> 
+            </div>
+            <div class="form-group">
+                Cost: <input type="number" class="form-control" name="cost" placeholder="Estimated cost in NAD if known">
+            </div>
+            <div class="form-group">
+                Comment: <textarea id="comment" name="comment" placeholder="Any comment about completed Task" cols="100" class="form-control"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Resolved</button>
+        </form>
+    </div> 
+  <!--  <button id="pending-expand" class="btn btn-info">Set as Pending</button>
+    <div id="pending">    
+        <form action="{% url 'pending' report_view.pk %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">  
+            <textarea style="height: fit-content;" id="pending-reason" name="reason" placeholder="State why this is pending" cols="200" rows="10" required class="form-control"></textarea>
+            </div>
+            <br><button type="submit" class="btn btn-info">Submit</button>
+        </form>
+    </div> -->
+</div>
+{% endblock %}
+{% block script %}
+    <script src="{% static 'jedsreport/pendingitem.js' %}"></script>
+{% endblock %}
