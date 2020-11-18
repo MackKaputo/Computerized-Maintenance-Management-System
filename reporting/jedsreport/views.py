@@ -246,4 +246,8 @@ def solved(request,report_id):
         resolved.save()
         return redirect("index")
 
-        
+def pending_item(request,pending_item_id):
+    pending_item = Pending.objects.get(pk=pending_item_id)
+    return render(request, "jedsreport/pendingitem.html",{
+        "report_view":pending_item
+    })

@@ -15,6 +15,7 @@ urlpatterns = [
     path("solved/<int:report_id>",views.solved, name="solved"),
     path("pending/<int:report_id>", views.pending, name = "pending"),
     path("pending", views.pending_report, name = "pending_report"),
+    path("pendingitem/<int:pending_item_id>",views.pending_item,name = "pending_item"),
     path("unattended", views.unattended, name="unattended")
 
 ]

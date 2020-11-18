@@ -27,11 +27,13 @@
             </thead>
             <tbody>
                 {% for report in pending_reports %}
+                
                 <tr>
-                    <td id="pdt">{{ report.report.title }}</td>
+                    
+                    <td id="pdt"><a href="{% url 'pending_item' report.pk %}">{{ report.report.title }}</a></td>
                     <td id="pdt">{{ report.reason }}</td>
                     <td id="pdt">{{ report.timestamp}}</td>
-                </tr>
+                </tr> </a>
                 {% endfor %}
             </tbody>
         </table>
