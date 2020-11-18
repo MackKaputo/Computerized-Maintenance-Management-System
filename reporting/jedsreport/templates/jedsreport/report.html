@@ -49,7 +49,12 @@
                 <tr>
                     <td id="pdt" colspan="2">{{ report_view.description }}</td>
                 </tr>
-
+                {% if report_view.image %}
+                <tr >
+                      <td id="pdt" colspan="2"><img src="{{ report_view.image.url }}"> </td>
+                </tr>
+                 {% endif %}
+                
                 
             </tbody>
         </table>

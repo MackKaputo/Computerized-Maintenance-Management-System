@@ -4,19 +4,38 @@
 <h5 style="padding:1%;"> Inactive Reports (Resolved) </h5>
     {% if user.is_authenticated %}
 
-        <div class="flex-container">
-            {% for inactive in inactives %}
-                <div >
-                    <h5>{{ inactive.report.title }}</h5>
-                    <p>Resolved by: {{ inactive.who }} </p>
-                    {% if inactive.report.image %}
-                        <img src="{{ inactive.image.url }}">
-                    {% endif %} 
-                </div>
-            {% empty %}
-                <li> There is no resolved problems so far </li>
-            {% endfor %}
+        <table style="background-color:rgb(11, 184, 40); width: 90%;">
+            <thead style="background-color: rgb(255, 140, 0);">
+                <tr style="text-align: center;">
+                    <th id="pdt"> OBJECT </th>
+                    <th id="pdt"> RESOLVED BY </th>
+                    <th id="pdt"> DATE </th>
+                    <th id="pdt">ESTIMATED COST (NAD)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inactive in inactives %}
+                
+                <tr>    
+                    <td id="pdt"><a href="{% url 'resolved_item' inactive.pk %}">{{ inactive.report.title }}</a></td>
+                    <td id="pdt">{{ inactive.who }}</td>
+                    <td id="pdt">{{ inactive.timestamp}}</td>
+                    <td id="pdt">
+                        {% if inactive.cost %}
+                            {{ inactive.cost }}
+                        {% else %}
+                            Unknown
+                        {% endif %}
+                    </td>
+                </tr> 
+                {% endfor %}
+            </tbody>
+        </table><br>
+
+        <div class="border border-primary" style="text-align: center;">
+            <h1>Estimated Total Known Cost: &#36N {{ total_cost }} </h1>
         </div>
+        
     {% endif %}
 
 {% endblock %}

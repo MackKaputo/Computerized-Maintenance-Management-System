@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django import forms
 from .models import User, Report, Pending, Resolved
+from django.db.models import Sum
 # Create your views here.
 
 def index(request):
@@ -155,9 +156,11 @@ def new_report(request):
 
 #The solved ones
 def inactive(request):
-    inactives = Resolved.objects.all()
+    inactives = Resolved.objects.all().order_by('-timestamp')
+    total_cost = Resolved.objects.all().aggregate(Sum('cost'))['cost__sum']
     return render(request,"jedsreport/inactive.html",{
-        "inactives":inactives
+        "inactives":inactives,
+        "total_cost":total_cost
     })
 
 def report(request,report_id):
@@ -239,6 +242,9 @@ def solved(request,report_id):
         item = Report.objects.get(pk=report_id)
         item.status_read = True
         item.save()
+        pend = Pending.objects.get(pk=report_id)
+        pend.status = False
+        pend.save()
         who = request.POST["who"]
         comment = request.POST["comment"]
         cost = int(request.POST["cost"])
@@ -246,8 +252,18 @@ def solved(request,report_id):
         resolved.save()
         return redirect("index")
 
+#Describing pending object
 def pending_item(request,pending_item_id):
     pending_item = Pending.objects.get(pk=pending_item_id)
     return render(request, "jedsreport/pendingitem.html",{
         "report_view":pending_item
+    })
+
+#Describing resolved item
+def resolved_item(request, resolved_item_id):
+    resolved_this = Resolved.objects.get(pk=resolved_item_id)
+    resolved_pending = Pending.objects.get(pk=resolved_item_id)
+    return render(request,"jedsreport/resolveditem.html",{
+        "resolved_this": resolved_this,
+        "resolved_pending": resolved_pending
     })

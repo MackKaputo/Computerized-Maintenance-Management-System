@@ -57,6 +57,11 @@
                 <tr>
                     <td id="pdt" colspan="2">{{ report_view.report.description }}</td>
                 </tr>
+                {% if report_view.report.image %}
+                <tr >
+                      <td id="pdt" colspan="2"><img src="{{ report_view.report.image.url }}"> </td>
+                </tr>
+                 {% endif %}
 
                 
             </tbody>
@@ -70,7 +75,7 @@
             Resolved by: <input type="text" name="who"  placeholder="Employee/Contractor Name" class="form-control" required> 
             </div>
             <div class="form-group">
-                Cost: <input type="number" class="form-control" name="cost" placeholder="Estimated cost in NAD if known">
+                Cost: <input type="number" class="form-control" name="cost" placeholder="Estimated cost in NAD ( Enter 0 if unknown or solved by internal employee )" required>
             </div>
             <div class="form-group">
                 Comment: <textarea id="comment" name="comment" placeholder="Any comment about completed Task" cols="100" class="form-control"></textarea>

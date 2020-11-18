@@ -16,7 +16,8 @@ urlpatterns = [
     path("pending/<int:report_id>", views.pending, name = "pending"),
     path("pending", views.pending_report, name = "pending_report"),
     path("pendingitem/<int:pending_item_id>",views.pending_item,name = "pending_item"),
-    path("unattended", views.unattended, name="unattended")
+    path("unattended", views.unattended, name="unattended"),
+    path("resolveditem/<int:resolved_item_id>", views.resolved_item, name="resolved_item")
 
 ]
 if settings.DEBUG:
