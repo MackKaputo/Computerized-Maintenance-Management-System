@@ -98,12 +98,11 @@ class NewReport(forms.Form):
     image = forms.FileField(required=False)
 
     #Set a list of existing departments
-    DEPARTMENTS = [('Civil','CIVIL'),
-        ('Mechanical','MECHANICAL'),
-        ('Electronics & Computer','ELECTRONICS & COMPUTER'),
-        ('Electrical','ELECTRICAL'),
-        ('Mining & Metallurgy','MINING & METALLURGY')]
-    department = forms.CharField(label="Department", widget=forms.Select(choices=DEPARTMENTS))
+    DEPARTMENTS = [('German','GERMAN'),
+        ('Indian','INDIAN'),
+        ('Namibian','NAMIBIAN')
+        ]
+    department = forms.CharField(label="Wing", widget=forms.Select(choices=DEPARTMENTS))
 
 #Creating and saving new reports
 def new_report(request):
@@ -221,7 +220,7 @@ def plot(request):
     
     # Create names on the x-axis
     plt.xticks(y_pos, departments)
-    plt.title("Number of reports by Departments")
+    plt.title("Number of reports by Wing")
     plt.ylabel("Number of reports")
 
     #plt.plot(range(10))

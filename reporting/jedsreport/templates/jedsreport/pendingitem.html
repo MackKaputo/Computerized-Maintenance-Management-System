@@ -47,7 +47,7 @@
                     <td id="pdt">{{ report_view.report.venue }}</td>
                 </tr>
                 <tr>
-                    <td id="pdt"> Department </td>
+                    <td id="pdt"> Wing </td>
                     <td id="pdt">{{ report_view.report.department }}</td>
                 </tr>
                 <tr>
@@ -67,6 +67,7 @@
             </tbody>
         </table>
     </div>
+    {% if request.user.is_superuser %}
     <button id="resolved-expand" class="btn btn-success">Set as Resolved</button>
     <div id="resolved">
         <form action="{% url 'solved' report_view.pk %}" method="POST">
@@ -83,6 +84,7 @@
             <button type="submit" class="btn btn-success">Resolved</button>
         </form>
     </div> 
+    {% endif %}
   <!--  <button id="pending-expand" class="btn btn-info">Set as Pending</button>
     <div id="pending">    
         <form action="{% url 'pending' report_view.pk %}" method="POST">

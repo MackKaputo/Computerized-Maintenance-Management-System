@@ -39,7 +39,7 @@
                     <td id="pdt">{{ report_view.venue }}</td>
                 </tr>
                 <tr>
-                    <td id="pdt"> Department </td>
+                    <td id="pdt"> Wing </td>
                     <td id="pdt">{{ report_view.department }}</td>
                 </tr>
                 <tr>
@@ -75,6 +75,7 @@
             <button type="submit" class="btn btn-success">Resolved</button>
         </form>
     </div> -->
+    {% if request.user.is_superuser %}
     <button id="pending-expand" class="btn btn-info">Set as Pending</button>
     <div id="pending">    
         <form action="{% url 'pending' report_view.pk %}" method="POST">
@@ -85,6 +86,7 @@
             <br><button type="submit" class="btn btn-info">Submit</button>
         </form>
     </div>
+    {% endif %}
 </div>
 {% endblock %}
 {% block script %}

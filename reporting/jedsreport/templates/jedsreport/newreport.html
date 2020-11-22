@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block body %}
-
+    <br><p style="text-align: center; color: red; font-size: large;"> Complete the following form to report an identified problem </p><br>
     <form method="post" action="{% url 'newreport' %}" enctype="multipart/form-data" id="compose-form">
         {% csrf_token %}
         
