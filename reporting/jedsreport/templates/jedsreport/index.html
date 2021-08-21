@@ -1,5 +1,5 @@
 {% extends "jedsreport/layout.html" %}
-
+{% load static %}
 {% block body %}
     
     {% if user.is_authenticated %}
@@ -29,6 +29,9 @@
         </table>
     </div>
           
-       
+    <div class="my-image">
+        <h1> How it works</h1>
+        <img src="{% static 'jedsreport/navigation.JPG' %}" alt="how it works" class="image-flow">
+    </div>   
     {% endif %}
 {% endblock %}

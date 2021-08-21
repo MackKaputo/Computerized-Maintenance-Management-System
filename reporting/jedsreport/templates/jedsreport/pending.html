@@ -31,7 +31,7 @@
                 <tr>
                     
                     <td id="pdt"><a href="{% url 'pending_item' report.pk %}">{{ report.report.title }}</a></td>
-                    <td id="pdt">{{ report.reason }}</td>
+                    <td id="pdt"><a href="{% url 'pending_item' report.pk %}">{{ report.reason }}</a></td>
                     <td id="pdt">{{ report.timestamp}}</td>
                 </tr> </a>
                 {% endfor %}

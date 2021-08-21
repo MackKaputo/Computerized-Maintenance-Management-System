@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>JedsReport</title>
+        <title>UNAM-Report</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link href="{% static 'jedsreport/styles.css' %}" rel="stylesheet">
         {% block script %}
@@ -11,40 +11,66 @@
     <body>
         
         <div>
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'unattended' %}">Unattended </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'pending_report' %}">Pending </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'inactive' %}">Resolved </a>
-            </li>
-            {% if user.is_authenticated %}
+            <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'newreport' %}">New report</a>
+                    <a class="nav-link" href="{% url 'index' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'plot' %}"> Visualize </a>
+                    <a class="nav-link" href="{% url 'unattended' %}">Unattended </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                    <a class="nav-link" href="{% url 'pending_report' %}">Pending </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    <a class="nav-link" href="{% url 'inactive' %}">Resolved </a>
                 </li>
-            {% endif %}
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'newreport' %}">Report new issue</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'plot' %}"> Visualize </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
     
         </div>
+        {% if not user.is_authenticated %}
+        <div class="information">
+            <p class="not-logged-in-word"> Not logged In  [ read below ]</p>
+            <div>
+                <p>Register or log in with: </p>
+                As a reporter: (can only view current state of problems and report new issues)
+                <ul>
+                    <li>username: mack</li>
+                    <li>password: 1234</li>
+                </ul>
+                As an administrator: (can view, report new issue and change state of issue)
+                <ul>
+                    <li>username: kaputo</li>
+                    <li>password: 1234</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="my-image">
+            <h1> How it works</h1>
+            <img src="{% static 'jedsreport/navigation.JPG' %}" alt="how it works" class="image-flow">
+        </div> 
+        {% endif %}
+        
         {% block body %}
         {% endblock %}
+        
     </body>
 </html>

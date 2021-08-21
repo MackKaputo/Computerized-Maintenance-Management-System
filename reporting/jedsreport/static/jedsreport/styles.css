@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(31, 12, 65);
+    background-color:  rgb(75, 37, 8);
     margin: 20px;
     padding: 20px;
     color: antiquewhite;
@@ -9,6 +9,30 @@ body {
     background-color: rgb(245, 240, 241);
     font-weight: 600;
 }
+
+.information {
+    margin: 2em;
+    padding: 1em;
+
+}
+
+.not-logged-in-word {
+    font-size: large;
+    padding: .5em;
+    border: thistle 1px solid;
+    text-align: center;
+}
+
+.my-image {
+    display: grid;
+    place-items: center;
+    margin-top: 2em;
+}
+.image-flow {
+    width: 90%;
+    margin: 1em;
+}
+
 .counter {
     margin: auto;
     width: 50%;
