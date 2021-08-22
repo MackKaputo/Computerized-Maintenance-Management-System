@@ -23,9 +23,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'lusz1nys%=kn351&2#(j%*94@!4wy2+1udikr0g0y@q*ud5=8b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True #! Development
+DEBUG = False #! Production
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["reports-by-mack-kaputo.herokuapp.com", "127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -44,6 +45,10 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+
+    #! Add this middleware
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -123,6 +128,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#! Static files to be served with heroku path
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # +++++++++  Saving images(files) in media  +++++
 MEDIA_URL = '/media/'
