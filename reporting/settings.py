@@ -32,7 +32,6 @@ ALLOWED_HOSTS = ["reports-by-mack-kaputo.herokuapp.com", "127.0.0.1", "localhost
 # Application definition
 
 INSTALLED_APPS = [
-    'jedsreport',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
